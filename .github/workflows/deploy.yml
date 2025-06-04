@@ -19,15 +19,17 @@ jobs:
           chmod 600 key.pem
           ssh -i key.pem -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST '
             if ! command -v docker-compose &> /dev/null; then
-              echo "Docker Compose topilmadi, o‘rnatilmoqda..."
+              echo "Docker Compose topilmadi, o`rnatilmoqda..."
               sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" \
               -o /usr/local/bin/docker-compose
               sudo chmod +x /usr/local/bin/docker-compose
             else
               echo "Docker Compose allaqachon o`rnatilgan."
             fi
+
             cd /home/ubuntu/server-2
             git pull origin main
+
             sudo docker-compose down
             sudo docker-compose up --build -d
           '
